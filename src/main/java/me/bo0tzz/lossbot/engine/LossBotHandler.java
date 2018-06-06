@@ -3,7 +3,6 @@ package me.bo0tzz.lossbot.engine;
 import com.google.gson.Gson;
 import com.jtelegram.api.events.EventHandler;
 import com.jtelegram.api.events.message.PhotoMessageEvent;
-import com.jtelegram.api.requests.message.framework.ReplyMarkup;
 import com.jtelegram.api.requests.message.send.SendText;
 import me.bo0tzz.lossbot.LossBot;
 import me.bo0tzz.lossbot.bean.PredictionResult;
@@ -14,7 +13,6 @@ import org.apache.commons.io.IOUtils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
-import java.util.SortedMap;
 import java.util.TreeMap;
 
 public class LossBotHandler implements EventHandler<PhotoMessageEvent> {
@@ -25,7 +23,7 @@ public class LossBotHandler implements EventHandler<PhotoMessageEvent> {
     private final Gson gson;
 
     public static final MediaType MULTIPART = MediaType.parse("multipart/form-data");
-    public static final String FORMAT = "I am %.2f% sure that your image is %s.";
+    public static final String FORMAT = "I am %.2f%% sure that your image is %s.";
 
     public LossBotHandler(LossBot lossBot, Configuration configuration) {
         this.lossBot = lossBot;

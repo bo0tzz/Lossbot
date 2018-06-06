@@ -22,14 +22,14 @@ public class Configuration {
     }
 
     private String getApiUrl(String[] args) {
-        String apiUrl = System.getenv("API_URL");
-        if (apiUrl == null || apiUrl.equals("")) {
+        String url = System.getenv("API_URL");
+        if (url == null || url.equals("")) {
             if (args.length < 2) {
                 System.exit(0);
             }
-            apiUrl = args[1];
+            url = args[1];
         }
-        return apiUrl;
+        return url;
     }
 
     public String getTelegramKey() {
