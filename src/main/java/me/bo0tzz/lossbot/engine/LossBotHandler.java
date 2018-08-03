@@ -56,13 +56,16 @@ public class LossBotHandler implements EventHandler<PhotoMessageEvent> {
             result.getPredictions().forEach(p -> predictions.put(p.getProbability(), p.getTagName()));
 
             Map.Entry<Double, String> entry = predictions.firstEntry();
-            String message = String.format(FORMAT, entry.getKey() * 100, entry.getValue());
 
-            lossBot.getBot().perform(SendText.builder()
-                    .chatId(event.getMessage().getChat().getChatId())
-                    .replyToMessageID(event.getMessage().getMessageId())
-                    .text(message)
-                    .build());
+            boolean chatIsPrivate = event.getMessage().getChat().getType().equals("PRIVATE");
+            if (chatIsPrivate || (!chatIsPrivate && entry.getKey() >= 0.6)) {
+                String message = String.format(FORMAT, entry.getKey() * 100, entry.getValue());
+                lossBot.getBot().perform(SendText.builder()
+                        .chatId(event.getMessage().getChat().getChatId())
+                        .replyToMessageID(event.getMessage().getMessageId())
+                        .text(message)
+                        .build());
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
